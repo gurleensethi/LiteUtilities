@@ -118,7 +118,7 @@ open class RecyclerAdapterUtil<T>(
         /*
         * Return the created adapter
         * */
-        fun getAdapter(): RecyclerAdapterUtil<T> {
+        fun build(): RecyclerAdapterUtil<T> {
             return mRecyclerAdapter
         }
 

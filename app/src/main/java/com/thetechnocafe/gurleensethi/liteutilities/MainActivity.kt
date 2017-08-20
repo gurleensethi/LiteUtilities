@@ -17,10 +17,22 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById(R.id.recyclerView) as RecyclerView
         val list = listOf("Test", "1", "2", "3", "This is a test", "123")
         recyclerView.layoutManager = LinearLayoutManager(this)
+        val recyclerAdapter = RecyclerAdapterUtil<String>(this, list, R.layout.item_recycler_view)
+        recyclerAdapter.addOnDataBindListener { itemView, item, position ->
+            val textView = itemView.findViewById<TextView>(R.id.textView)
+            textView.text = item
+        }
+
         RecyclerAdapterUtil.Builder(this, list, R.layout.item_recycler_view)
                 .bindView { itemView, item, position ->
                     val textView = itemView.findViewById<TextView>(R.id.textView)
                     textView.text = item
+                }
+                .addClickListener { item, position ->
+                    //Take action when item is pressed
+                }
+                .addLongClickListener { item, position ->
+                    //Take action when item is long pressed
                 }
                 .into(recyclerView)
 
