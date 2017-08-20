@@ -28,8 +28,8 @@ Primary motivation behind the development of this library is to hide the day-to-
 
 ## Usage and API
 
-* ### RecyclerUtils
-RecyclerUtils contain a very handy class named `RecyclerAdapterUtil` which can be used to make recycler adapters in as little as 4 lines. No need to create a separate class for every recycler view.
+### RecyclerUtils
+RecyclerUtils contain a very handy class named `RecyclerAdapterUtil` which can be used to make recycler adapters in as little as 4 lines. No need to create a separate adapter class for every recycler view.
 
 The constructor of `RecyclerAdapterUtil` takes 3 parameters.
 * Context - Application `Context`.
