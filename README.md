@@ -18,10 +18,10 @@ compile 'com.github.gurleensethi:'
 ```
 
 #### Current Features
-* [RecyclerUtils](recyclerutils) - Remove the need to make an adapter everytime, set up recycler adapter in as little as 4 lines.
-* [ScrollUtils](scrollutils) - Easily hide/show FloationActionButton on scroll when using RecyclerView or NestedScrollView.
-* [ToastUtils](toastutils) - Creating toasts are just a function away.
-* [SPUtils](sputils) - Simple DSL for Shared Preferences.
+* [RecyclerUtils](#recyclerutils) - Remove the need to make an adapter everytime, set up recycler adapter in as little as 4 lines.
+* [ScrollUtils](#scrollutils) - Easily hide/show FloationActionButton on scroll when using RecyclerView or NestedScrollView.
+* [ToastUtils](#toastutils) - Creating toasts are just a function away.
+* [SPUtils](#sputils) - Simple DSL for Shared Preferences.
 
 #### Motivation
 Primary motivation behind the development of this library is to hide the day-to-day boilerplate code that android developers have to deal with, by providing a simple and concise API, but also maintaining complete functionality at the same time.
