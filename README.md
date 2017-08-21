@@ -14,7 +14,7 @@ allprojects {
 ```
 2. Add the `LiteUtilities` dependency in your app level `build.gradle` file
 ```gradle
-compile 'com.github.gurleensethi:'
+compile 'com.github.gurleensethi:LiteUtilities:v1.0.0'
 ```
 
 #### Current Features
@@ -142,3 +142,53 @@ Both of these functions take three parameters:
 coloredShortToast("Colored short toast", R.color.darker_gray, R.color.black)
 coloredLongToast("Colored long toast", R.color.darker_gray, R.color.black)
 ```
+
+SPUtils
+======
+
+Easy DSL for sharedpreferences. No need to write long lines of code when using SharedPreferences. The below functions are implemented as extension functions on `Context`, so they are available wherever `Context` is available.
+
+### Storing values
+To use the default SharedPreferences file which is provided by the library itself, use `defaultSharedPreferences` function which takes a lambda for required operations, much easier to understand with an example. The mode used to open file is `MODE_PRIVATE`.
+
+```kotlin
+defaultSharedPreferences {
+            putString("string", "Some Value 123")
+            putInt("integer", 1)
+        }
+```
+
+If you want to use your own file and mode the use `sharedPreferences(fileName, mode, lambda)`.
+
+```kotlin
+sharedPreferences("SP", Context.MODE_PRIVATE) {
+            putString("string", "Some Value 123")
+            putInt("integer", 1)
+        }
+```
+
+### Fetching values
+To get value from default SharedPreferences use `getFromDefaultSharedPreferences<T>(key, defaultValue)`.
+
+```kotlin
+getFromDefaultSharedPreferences<String>("string", "default value")
+```
+
+You can also eliminate the need to specify a type explicitly, but in that case the type will be inferred from the type of `defaultValue` which is the second parameter so you can write.
+
+```kotlin
+getFromDefaultSharedPreferences("string", "default value")
+```
+
+To get from custom SharedPreferences file use `getFromSharedPreferences<T>(fileName, key, defaultValue)`.
+
+```kotlin
+getFromSharedPreferences<String>("SP", "string", "default")
+                /* OR */
+getFromSharedPreferences("SP", "string", "default")
+```
+
+Support
+======
+
+The primary purpose of this library is to speed up development process by removing boilerplate code, so if you have and idea or a new feature that meets the requirement and enhances the library as a whole or you found a bug in the existing code please open an [issue](https://github.com/gurleensethi/LiteUtilities/issues/new), it is much appreciated.
