@@ -53,7 +53,7 @@ recyclerAdapter.addOnDataBindListener { itemView, item, position ->
 * `item` - Data item from the list.
 * `position` - Position of the data item in the list.
 
-#### Click Listeners
+### Click Listeners
 You can also add `OnClickListener` and `OnLongClickListener` simply by implementing two lambdas.
 
 ```kotlin
@@ -72,7 +72,7 @@ Both `addOnClickListener` and `addOnLongClickListener` provide lambda with two p
 * `item` - Data item from the list.
 * `position` - Position of the data item in the list.
 
-#### Using Builder pattern for more consice code
+### Using Builder pattern for more consice code
 
 Use `RecyclerAdapterUtil.Builder` to chain functions as shown below.
 
@@ -105,7 +105,7 @@ val floatingActionButton = findViewById(R.id.floatingActionButton) as FloatingAc
 nestedSrollView.hideFloatingActionButtonOnScroll(floatingActionButton)
 ```
 
-#### Take custom action when scrolled up and down
+### Take custom action when scrolled up and down
 If you want to take custom action when scrolled up or down you can implement `ScrollListener` using the function `addScrollListener(ScrollListener)`. This works with both `NestedScrollView` and `RecyclerView`.
 
 ```kotlin
@@ -118,4 +118,27 @@ nestedScrollView.addScrollListener(object : ScrollListener {
                 //Take Action when user scrolls up
             }
         })
+```
+
+ToastUtils
+======
+
+Making toast has never been easier. Just use `shortToast(String)` for making short toast and `longToast(String)` for making long ones. These functions are implemented as extension functions on `Context`, so wherever `Context` is available, these functions can be used.
+
+```kotlin
+shortToast("This is a short toast")
+longToast("This is a long toast")
+```
+
+### Making colored Toasts
+To make a toast with custom background and text color use `coloredShortToast(message, backgroundColor, textColor)` or `coloredLongToast(message, backgroundColor, textColor)`.
+
+Both of these functions take three parameters:
+* `message`: String displayed by the toast.
+* `backgroundColor`: Background Color of the toast.
+* `textColor`: Color of the text shown.
+
+```kotlin
+coloredShortToast("Colored short toast", R.color.darker_gray, R.color.black)
+coloredLongToast("Colored long toast", R.color.darker_gray, R.color.black)
 ```
