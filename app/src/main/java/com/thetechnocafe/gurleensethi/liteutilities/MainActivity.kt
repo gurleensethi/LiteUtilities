@@ -31,12 +31,16 @@ class MainActivity : AppCompatActivity() {
                     textView.text = item
                 }
                 .addClickListener { item, position ->
+                    coloredShortToast(item, android.R.color.darker_gray, android.R.color.black)
                     //Take action when item is pressed
                 }
                 .addLongClickListener { item, position ->
                     //Take action when item is long pressed
                 }
                 .into(recyclerView)
+
+        shortToast("This is a short toast")
+        longToast("This is a long toast")
 
         sharedPreferences("SP", Context.MODE_PRIVATE) {
             putString("string", "Some Value 123")
