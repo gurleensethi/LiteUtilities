@@ -26,9 +26,9 @@ compile 'com.github.gurleensethi:'
 #### Motivation
 Primary motivation behind the development of this library is to hide the day-to-day boilerplate code that android developers have to deal with, by providing a simple and concise API, but also maintaining complete functionality at the same time.
 
-## Usage and API
+RecyclerUtils
+======
 
-### RecyclerUtils
 RecyclerUtils contain a very handy class named `RecyclerAdapterUtil` which can be used to make recycler adapters in as little as 4 lines. No need to create a separate adapter class for every recycler view.
 
 The constructor of `RecyclerAdapterUtil` takes 3 parameters.
@@ -93,3 +93,29 @@ RecyclerAdapterUtil.Builder(this, list, R.layout.item_recycler_view)
 
 `into(RecyclerView)` function takes the reference of `RecyclerView` and directly sets the adapter to it so you don't have to do it explicitly.
 If you want the object of adapter and want to set it manually use `build()` instead of `into(RecyclerView)`.
+
+ScrollUtils
+======
+
+Hide FloatingActionButton when user scrolls up and show it again when scrolled down. You can achieve this by using function `hideFloatingActionButtonOnScroll` on `NestedScrollView` and `RecyclerView`. These functions are implemented as extension functions.
+```kotlin
+val nestedScrollView = findViewById(R.id.nestedScrollView) as NestedScrollView
+val floatingActionButton = findViewById(R.id.floatingActionButton) as FloatingActionButton
+
+nestedSrollView.hideFloatingActionButtonOnScroll(floatingActionButton)
+```
+
+#### Take custom action when scrolled up and down
+If you want to take custom action when scrolled up or down you can implement `ScrollListener` using the function `addScrollListener(ScrollListener)`. This works with both `NestedScrollView` and `RecyclerView`.
+
+```kotlin
+nestedScrollView.addScrollListener(object : ScrollListener {
+            override fun scrolledDown() {
+                //Take Action when user scrolls down
+            }
+
+            override fun scrolledUp() {
+                //Take Action when user scrolls up
+            }
+        })
+```
