@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
             textView.text = item
         }
 
+
+
         RecyclerAdapterUtil.Builder(this, list, R.layout.item_recycler_view)
                 .bindView { itemView, item, position ->
                     val textView = itemView.findViewById<TextView>(R.id.textView)
