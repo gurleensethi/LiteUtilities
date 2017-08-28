@@ -40,11 +40,21 @@ So to create a recycler adapter that displays a list of strings, you would write
 ```kotlin
 val list = listOf("Test", "1", "2", "3", "This is a test", "123")
 val recyclerAdapter = RecyclerAdapterUtil<String>(this, list, R.layout.item_recycler_view)
+recyclerAdapter.addViewsList(R.id.textView, R.id.imageView)
+```
+The `addViewsList` function is important, pass the id's of all views contained in the single layout file provided in constructor (in this case it is`R.layout.item_recycler_view`) that you want to refer to while binding data. There are two ways to pass these id's.
+##### All the views that you want to reference while binding data should be provided before hand, else the app will not function properly.
+The `addViewsList` function is important, pass the id's of all views contained in the single layout file provided in constructor (in this case it is`R.layout.item_recycler_view`) that you want to refer to while binding data. There are two ways to pass these id's.
+```kotlin
+recyclerAdapter.addViewsList(R.id.textView, R.id.imageView)
+                  /* OR */
+val listOfViews = listOf(R.id.textView, R.id.imageView)
+recyclerAdapter.addViewsList(listOfViews)
 ```
 To bind data, add data bind listener:
 ```kotlin
-recyclerAdapter.addOnDataBindListener { itemView, item, position -> 
-            val textView = itemView.findViewById<TextView>(R.id.textView)
+recyclerAdapter.addOnDataBindListener { itemView, item, position. innerViews -> 
+            val textView = innerViews[R.id.textView] as TextView
             textView.text = item
         }
 ```
@@ -52,6 +62,7 @@ recyclerAdapter.addOnDataBindListener { itemView, item, position ->
 * `itemView` - The ViewHolder itself.
 * `item` - Data item from the list.
 * `position` - Position of the data item in the list.
+* `innerViews` - A `Map<Int, View>` containing the reference to the views that were provided in the `addViewsList` function.
 
 ### Click Listeners
 You can also add `OnClickListener` and `OnLongClickListener` simply by implementing two lambdas.
@@ -78,8 +89,9 @@ Use `RecyclerAdapterUtil.Builder` to chain functions as shown below.
 
 ```kotlin
 RecyclerAdapterUtil.Builder(this, list, R.layout.item_recycler_view)
-                .bindView { itemView, item, position ->
-                    val textView = itemView.findViewById<TextView>(R.id.textView)
+                .viewsList(R.id.textView, R.id.imageView)
+                .bindView { itemView, item, position, innerViews ->
+                    val textView = innerViews[R.id.textView] as TextView
                     textView.text = item
                 }
                 .addClickListener { item, position ->
