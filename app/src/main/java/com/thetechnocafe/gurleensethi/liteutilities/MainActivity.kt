@@ -18,16 +18,15 @@ class MainActivity : AppCompatActivity() {
         val list = listOf("Test", "1", "2", "3", "This is a test", "123")
         recyclerView.layoutManager = LinearLayoutManager(this)
         val recyclerAdapter = RecyclerAdapterUtil<String>(this, list, R.layout.item_recycler_view)
-        recyclerAdapter.addOnDataBindListener { itemView, item, position ->
-            val textView = itemView.findViewById<TextView>(R.id.textView)
+        recyclerAdapter.addOnDataBindListener { itemView, item, position, viewsMap ->
+            val textView = viewsMap[R.id.textView] as TextView
             textView.text = item
         }
 
-
-
         RecyclerAdapterUtil.Builder(this, list, R.layout.item_recycler_view)
-                .bindView { itemView, item, position ->
-                    val textView = itemView.findViewById<TextView>(R.id.textView)
+                .viewsList(R.id.textView)
+                .bindView { itemView, item, position, viewsMap ->
+                    val textView = viewsMap[R.id.textView] as TextView
                     textView.text = item
                 }
                 .addClickListener { item, position ->
