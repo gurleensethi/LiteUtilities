@@ -14,7 +14,7 @@ allprojects {
 ```
 2. Add the `LiteUtilities` dependency in your app level `build.gradle` file
 ```gradle
-compile 'com.github.gurleensethi:LiteUtilities:v1.0.2'
+compile 'com.github.gurleensethi:LiteUtilities:v1.1.0'
 ```
 
 #### Current Features
