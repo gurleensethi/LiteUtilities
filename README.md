@@ -44,7 +44,6 @@ recyclerAdapter.addViewsList(R.id.textView, R.id.imageView)
 ```
 The `addViewsList` function is important, pass the id's of all views contained in the single layout file provided in constructor (in this case it is`R.layout.item_recycler_view`) that you want to refer to while binding data. There are two ways to pass these id's.
 ##### All the views that you want to reference while binding data should be provided before hand, else the app will not function properly.
-The `addViewsList` function is important, pass the id's of all views contained in the single layout file provided in constructor (in this case it is`R.layout.item_recycler_view`) that you want to refer to while binding data. There are two ways to pass these id's.
 ```kotlin
 recyclerAdapter.addViewsList(R.id.textView, R.id.imageView)
                   /* OR */
