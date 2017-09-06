@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/gurleensethi/LiteUtilities.svg)](https://jitpack.io/#gurleensethi/LiteUtilities)
+
 # LiteUtilities
 Speed up your android development by removing boilerplate code
 
