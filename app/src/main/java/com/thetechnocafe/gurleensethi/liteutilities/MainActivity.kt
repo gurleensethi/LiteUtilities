@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.TextView
 import com.thetechnocafe.gurleensethi.liteutils.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -52,5 +53,21 @@ class MainActivity : AppCompatActivity() {
 
         getFromSharedPreferences<String>("SP", "string", "default")
         getFromDefaultSharedPreferences<String>("string", "default")
+
+        button.setOnClickListener {
+            var result = editText.validator()
+                    .atLeastOneUpperCase()
+                    .atLeastOneLowerCase()
+                    .maximumCharacters(3)
+                    .minimumCharacters(1)
+                    .noNumbers()
+                    .addErrorCallback { errorType ->
+                        shortToast("Error ${errorType.toString()}")
+                    }
+                    .addSuccessCallback {
+                        shortToast("Passed")
+                    }
+                    .validate()
+        }
     }
 }

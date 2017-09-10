@@ -2,6 +2,10 @@ package com.thetechnocafe.gurleensethi.liteutils;
 
 import org.junit.Test;
 
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function1;
+
 import static org.junit.Assert.*;
 
 /**
@@ -17,6 +21,23 @@ public class ExampleUnitTest {
 
     @Test
     public void testValidator() {
-        Validator validator = new Validator("ijA");
+        Validator validator = new Validator("okokok-saruseth234324");
+        validator.atLeastOneSpecialCharacter()
+                .doesNotContainsString("sarusethi")
+                .addErrorCallback(new Function1<ValidationError, Unit>() {
+                    @Override
+                    public Unit invoke(ValidationError validationError) {
+                        System.out.println("Error " + validationError.toString());
+                        return null;
+                    }
+                })
+                .addSuccessCallback(new Function0<Unit>() {
+                    @Override
+                    public Unit invoke() {
+                        System.out.println("Success");
+                        return null;
+                    }
+                })
+                .validate();
     }
 }
