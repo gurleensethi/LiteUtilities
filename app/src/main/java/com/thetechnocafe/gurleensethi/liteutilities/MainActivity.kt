@@ -58,8 +58,8 @@ class MainActivity : AppCompatActivity() {
             var result = editText.validator()
                     .atLeastOneUpperCase()
                     .atLeastOneLowerCase()
-                    .maximumCharacters(3)
-                    .minimumCharacters(1)
+                    .maximumLength(3)
+                    .minimumLength(1)
                     .noNumbers()
                     .addErrorCallback { errorType ->
                         shortToast("Error ${errorType.toString()}")

@@ -38,19 +38,19 @@ class Validator(val text: String) {
     /*
     * User settable limits for the numbers of characters that the string can contain
     * */
-    private var MINIMUM_CHARACTERS = 0
-    private var MAXIMUM_CHARACTERS = Int.MAX_VALUE
+    private var MINIMUM_LENGTH = 0
+    private var MAXIMUM_LENGTH = Int.MAX_VALUE
 
     private var VALIDATION_ERROR_TYPE: ValidationError? = null
 
     public fun validate(): Boolean {
         //Check if the string characters count is in limits
-        if (text.length < MINIMUM_CHARACTERS) {
+        if (text.length < MINIMUM_LENGTH) {
             isValidated = false
-            setErrorType(ValidationError.MINIMUM_CHARACTERS)
-        } else if (text.length > MAXIMUM_CHARACTERS) {
+            setErrorType(ValidationError.MINIMUM_LENGTH)
+        } else if (text.length > MAXIMUM_LENGTH) {
             isValidated = false
-            setErrorType(ValidationError.MAXIMUM_CHARACTERS)
+            setErrorType(ValidationError.MAXIMUM_LENGTH)
         }
 
         //Invoke the error callback if supplied by the user
@@ -65,7 +65,6 @@ class Validator(val text: String) {
 
     public fun email(): Validator {
         if (!text.matches(Regex("^[A-Za-z0-9+_.-]+@(.+)\$"))) {
-            isValidated = false
             setErrorType(ValidationError.EMAIL)
         }
         return this
@@ -73,7 +72,6 @@ class Validator(val text: String) {
 
     public fun noNumbers(): Validator {
         if (text.matches(Regex(".*\\d.*"))) {
-            isValidated = false
             setErrorType(ValidationError.NO_NUMBERS)
         }
         return this
@@ -81,7 +79,6 @@ class Validator(val text: String) {
 
     public fun nonEmpty(): Validator {
         if (text.isEmpty()) {
-            isValidated = false
             setErrorType(ValidationError.NON_EMPTY)
         }
         return this
@@ -89,7 +86,6 @@ class Validator(val text: String) {
 
     public fun onlyNumbers(): Validator {
         if (!text.matches(Regex("\\d+"))) {
-            isValidated = false
             setErrorType(ValidationError.ONLY_NUMBERS)
         }
         return this;
@@ -97,7 +93,6 @@ class Validator(val text: String) {
 
     public fun allUpperCase(): Validator {
         if (text.toUpperCase() != text) {
-            isValidated = false
             setErrorType(ValidationError.ALL_UPPER_CASE)
         }
         return this
@@ -105,7 +100,6 @@ class Validator(val text: String) {
 
     public fun allLowerCase(): Validator {
         if (text.toLowerCase() != text) {
-            isValidated = false
             setErrorType(ValidationError.ALL_LOWER_CASE)
         }
         return this
@@ -113,7 +107,6 @@ class Validator(val text: String) {
 
     public fun atLeastOneLowerCase(): Validator {
         if (text.matches(Regex("[A-Z0-9]+"))) {
-            isValidated = false
             setErrorType(ValidationError.AT_LEAST_ONE_LOWER_CASE)
         }
         return this
@@ -121,19 +114,18 @@ class Validator(val text: String) {
 
     public fun atLeastOneUpperCase(): Validator {
         if (text.matches(Regex("[a-z0-9]+"))) {
-            isValidated = false
             setErrorType(ValidationError.AT_LEAST_ONE_UPPER_CASE)
         }
         return this
     }
 
-    public fun maximumCharacters(length: Int): Validator {
-        MAXIMUM_CHARACTERS = length
+    public fun maximumLength(length: Int): Validator {
+        MAXIMUM_LENGTH = length
         return this
     }
 
-    public fun minimumCharacters(length: Int): Validator {
-        MINIMUM_CHARACTERS = length
+    public fun minimumLength(length: Int): Validator {
+        MINIMUM_LENGTH = length
         return this
     }
 
@@ -149,7 +141,6 @@ class Validator(val text: String) {
 
     public fun atLeastOneNumber(): Validator {
         if (!text.matches(Regex(".*\\d.*"))) {
-            isValidated = false
             setErrorType(ValidationError.AT_LEAST_ONE_NUMBER)
         }
         return this
@@ -157,7 +148,6 @@ class Validator(val text: String) {
 
     public fun startsWithNonNumber(): Validator {
         if (Character.isDigit(text[0])) {
-            isValidated = false
             setErrorType(ValidationError.STARTS_WITH_NON_NUMBER)
         }
         return this
@@ -165,7 +155,6 @@ class Validator(val text: String) {
 
     public fun noSpecialCharacter(): Validator {
         if (!text.matches(Regex("[A-Za-z0-9]+"))) {
-            isValidated = false
             setErrorType(ValidationError.NO_SPECIAL_CHARACTER)
         }
         return this
@@ -173,29 +162,41 @@ class Validator(val text: String) {
 
     public fun atLeastOneSpecialCharacter(): Validator {
         if (text.matches(Regex("[A-Za-z0-9]+"))) {
-            isValidated = false
             setErrorType(ValidationError.AT_LEAST_ONE_SPECIAL_CHARACTER)
         }
         return this
     }
 
-    public fun containsString(string: String): Validator {
+    public fun contains(string: String): Validator {
         if (!text.contains(string)) {
-            isValidated = false
-            setErrorType(ValidationError.CONTAINS_STRING)
+            setErrorType(ValidationError.CONTAINS)
         }
         return this
     }
 
-    public fun doesNotContainsString(string: String): Validator {
+    public fun doesNotContains(string: String): Validator {
         if (text.contains(string)) {
-            isValidated = false
-            setErrorType(ValidationError.DOES_NOT_CONTAINS_STRING)
+            setErrorType(ValidationError.DOES_NOT_CONTAINS)
+        }
+        return this
+    }
+
+    public fun startsWith(string: String): Validator {
+        if (!text.startsWith(string)) {
+            setErrorType(ValidationError.STARTS_WITH)
+        }
+        return this
+    }
+
+    public fun endsWith(string: String): Validator {
+        if (!text.endsWith(string)) {
+            setErrorType(ValidationError.ENDS_WITH)
         }
         return this
     }
 
     private fun setErrorType(validationError: ValidationError) {
+        isValidated = false
         if (VALIDATION_ERROR_TYPE == null) {
             VALIDATION_ERROR_TYPE = validationError
         }
@@ -203,8 +204,8 @@ class Validator(val text: String) {
 }
 
 enum class ValidationError {
-    MINIMUM_CHARACTERS,
-    MAXIMUM_CHARACTERS,
+    MINIMUM_LENGTH,
+    MAXIMUM_LENGTH,
     AT_LEAST_ONE_UPPER_CASE,
     AT_LEAST_ONE_LOWER_CASE,
     ALL_LOWER_CASE,
@@ -217,6 +218,8 @@ enum class ValidationError {
     STARTS_WITH_NON_NUMBER,
     NO_SPECIAL_CHARACTER,
     AT_LEAST_ONE_SPECIAL_CHARACTER,
-    CONTAINS_STRING,
-    DOES_NOT_CONTAINS_STRING
+    CONTAINS,
+    DOES_NOT_CONTAINS,
+    STARTS_WITH,
+    ENDS_WITH
 }

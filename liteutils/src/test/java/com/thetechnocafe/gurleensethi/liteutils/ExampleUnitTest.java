@@ -21,9 +21,12 @@ public class ExampleUnitTest {
 
     @Test
     public void testValidator() {
-        Validator validator = new Validator("okokok-saruseth234324");
+        Validator validator = new Validator("abcdokokok-saruseth234324xyz");
         validator.atLeastOneSpecialCharacter()
-                .doesNotContainsString("sarusethi")
+                .maximumLength(14)
+                .startsWith("abcd")
+                .endsWith("xyz")
+                .doesNotContains("sarusethi")
                 .addErrorCallback(new Function1<ValidationError, Unit>() {
                     @Override
                     public Unit invoke(ValidationError validationError) {
