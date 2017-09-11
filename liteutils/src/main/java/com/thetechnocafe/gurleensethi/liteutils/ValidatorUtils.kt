@@ -1,5 +1,6 @@
 package com.thetechnocafe.gurleensethi.liteutils
 
+import android.support.design.widget.TextInputEditText
 import android.widget.EditText
 
 /**
@@ -10,6 +11,7 @@ import android.widget.EditText
  */
 
 public fun EditText.validator(): Validator = Validator(text.toString())
+public fun TextInputEditText.validator(): Validator = Validator(text.toString())
 
 /*
 * Class to process all the filters provided by the user
@@ -203,6 +205,10 @@ class Validator(val text: String) {
     }
 }
 
+/*
+* Enums that serve for identification of error while validation text.
+* Every enum is the name of a function with the corresponding validation
+* */
 enum class ValidationError {
     MINIMUM_LENGTH,
     MAXIMUM_LENGTH,

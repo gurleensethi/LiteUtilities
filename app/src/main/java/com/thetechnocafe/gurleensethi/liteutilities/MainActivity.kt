@@ -58,16 +58,17 @@ class MainActivity : AppCompatActivity() {
             var result = editText.validator()
                     .atLeastOneUpperCase()
                     .atLeastOneLowerCase()
-                    .maximumLength(3)
-                    .minimumLength(1)
+                    .maximumLength(20)
+                    .minimumLength(5)
                     .noNumbers()
-                    .addErrorCallback { errorType ->
-                        shortToast("Error ${errorType.toString()}")
-                    }
-                    .addSuccessCallback {
-                        shortToast("Passed")
-                    }
                     .validate()
         }
+
+        /*val validator = Validator(passwordEditText.text.toString())
+        validator.atLeastOneNumber()
+                .atLeastOneUpperCase()
+                .minimumLength(8)
+                .maximumLength(32)
+                .atLeastOneSpecialCharacter()*/
     }
 }
