@@ -219,7 +219,7 @@ var result: Boolean = editText.validator()
                     .noNumbers()
                     .validate()
 ```
-The `Validator` class has all the validation functions, chain all the functions that you require and call `validate()` to process. The result returend is a `Boolean`, `true` if all validation are passed, `false` if any one of them fails.
+The `Validator` class has all the validation functions, chain all the functions that you require and call `validate()` to process. The result returned is a `Boolean`, `true` if all validation are passed, `false` if any one of them fails.
 
 ### Adding callbacks to listen to results
 If you want to take action after the validation is complete, there are two callbacks available, `addSuccessCallback()` and `addErrorCallback(ValidationError)`. The `addSuccessCallback` is invoked when the valdiation passes, `addErrorCallback` is invoked when validation fails.
