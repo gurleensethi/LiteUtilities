@@ -26,6 +26,8 @@ compile 'com.github.gurleensethi:LiteUtilities:v1.2.0'
 * [SPUtils](#sputils) - Simple DSL for Shared Preferences.
 * [ValidatorUtils](#validatorutils) - Fast and simple text validation.
 
+##### The library is designed in such a way that if don't want to import the complete library but only want a specific Util, then you can download the corresponding file for the required Util, every Util has its own file/files and is not dependent on any other Util
+
 #### Motivation
 Primary motivation behind the development of this library is to hide the day-to-day boilerplate code that android developers have to deal with, by providing a simple and concise API, but also maintaining complete functionality at the same time.
 
