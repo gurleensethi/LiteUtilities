@@ -16,7 +16,7 @@ allprojects {
 ```
 2. Add the `LiteUtilities` dependency in your app level `build.gradle` file
 ```gradle
-compile 'com.github.gurleensethi:LiteUtilities:v1.2.0'
+compile 'com.github.gurleensethi:LiteUtilities:v1.3.0'
 ```
 
 #### Current Features
@@ -25,6 +25,7 @@ compile 'com.github.gurleensethi:LiteUtilities:v1.2.0'
 * [ToastUtils](#toastutils) - Creating toasts are just a function away.
 * [SPUtils](#sputils) - Simple DSL for Shared Preferences.
 * [ValidatorUtils](#validatorutils) - Fast and simple text validation.
+* [LogUtils](#logutils) - Simple and easy android logging.
 
 ##### The library is designed in such a way that if don't want to import the complete library but only want a specific Util, then you can download the corresponding file for the required Util, every Util has its own file/files and is not dependent on any other Util. You can find the code [here](https://github.com/gurleensethi/LiteUtilities/tree/master/liteutils/src/main/java/com/thetechnocafe/gurleensethi/liteutils).
 
@@ -267,6 +268,69 @@ validator.atLeastOneNumber()
     .maximumLength(32)
     .atLeastOneSpecialCharacter()
     .validate()
+```
+
+LogUtils
+======
+
+Simple and easy logging for android using LogUtils. Supported 6 log levels.
+To begin, set the log levels that you want to be logged. Messages will not be logged if no `LogLevel` is added.
+
+```kotlin
+LogUtils.addLevel(LogLevel.DEBUG)
+LogUtils.addLevel(LogLevel.INFO)
+LogUtils.addLevel(LogLevel.ERROR)
+LogUtils.addLevel(LogLevel.VERBOSE)
+LogUtils.addLevel(LogLevel.WARN)
+LogUtils.addLevel(LogLevel.WTF)
+```
+
+To enable all log levels just use `LogLevel.ALL`
+```kotlin
+LogUtils.addLevel(LogLevel.ALL)
+```
+
+Use the following functions throughout your app for logging purposes.
+```kotlin
+debug("This is a debug message")
+error("Some error occurred")
+warn("This is a warning")
+info("Some information")
+verbose("VERBOSE!")
+wtf("Ignore this")
+json("{message:'This is a message', version: {num: 10}}")
+shout("Shout this message loud!\nThank YOU")
+exception(Exception("ERROR"))
+```
+
+#### JSON
+To log a json string use the `json(jsonString)` function. This function will throw error if json structure is not right. To see the error `LogLevel.ERROR` should be enabled.
+```kotlin
+json("{message:'This is a message', version: {num: 10}}")
+```
+Output:
+```
+{
+    "message": "This is a message",
+    "version": {
+        "num": 10
+    }
+}
+```
+
+#### Shout
+`shout(message)` prints a big box around the message.
+```kotlin
+shout("Shout this message loud!\nThank YOU")
+```
+Output:
+```
+************************************
+*                                  *
+*     Shout this message loud!     *
+*             Thank YOU            *
+*                                  *
+************************************
 ```
 
 Support
