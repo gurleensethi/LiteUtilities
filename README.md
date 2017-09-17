@@ -16,7 +16,7 @@ allprojects {
 ```
 2. Add the `LiteUtilities` dependency in your app level `build.gradle` file
 ```gradle
-compile 'com.github.gurleensethi:LiteUtilities:v1.1.0'
+compile 'com.github.gurleensethi:LiteUtilities:v1.2.0'
 ```
 
 #### Current Features
@@ -24,6 +24,9 @@ compile 'com.github.gurleensethi:LiteUtilities:v1.1.0'
 * [ScrollUtils](#scrollutils) - Easily hide/show FloationActionButton on scroll when using RecyclerView or NestedScrollView.
 * [ToastUtils](#toastutils) - Creating toasts are just a function away.
 * [SPUtils](#sputils) - Simple DSL for Shared Preferences.
+* [ValidatorUtils](#validatorutils) - Fast and simple text validation.
+
+##### The library is designed in such a way that if don't want to import the complete library but only want a specific Util, then you can download the corresponding file for the required Util, every Util has its own file/files and is not dependent on any other Util. You can find the code [here](https://github.com/gurleensethi/LiteUtilities/tree/master/liteutils/src/main/java/com/thetechnocafe/gurleensethi/liteutils).
 
 #### Motivation
 Primary motivation behind the development of this library is to hide the day-to-day boilerplate code that android developers have to deal with, by providing a simple and concise API, but also maintaining complete functionality at the same time.
@@ -199,6 +202,71 @@ To get from custom SharedPreferences file use `getFromSharedPreferences<T>(fileN
 getFromSharedPreferences<String>("SP", "string", "default")
                 /* OR */
 getFromSharedPreferences("SP", "string", "default")
+```
+
+ValidatorUtils
+======
+
+Set of functions that provide easy and fast text validation. More than 15+ validation types available.
+Use the `Validator` class to access all the validation functions. This class is available using an extension function on `EditText` and `TextInputEditText`. Just call the `validator()` function.
+
+Using `Validator` directly on `EditText`.
+```kotlin
+var result: Boolean = editText.validator()
+                    .email()
+                    .atLeastOneUpperCase()
+                    .atLeastOneLowerCase()
+                    .maximumLength(20)
+                    .minimumLength(5)
+                    .noNumbers()
+                    .validate()
+```
+The `Validator` class has all the validation functions, chain all the functions that you require and call `validate()` to process. The result returned is a `Boolean`, `true` if all validation are passed, `false` if any one of them fails.
+
+### Adding callbacks to listen to results
+If you want to take action after the validation is complete, there are two callbacks available, `addSuccessCallback()` and `addErrorCallback(ValidationError)`. The `addSuccessCallback` is invoked when the valdiation passes, `addErrorCallback` is invoked when validation fails.
+
+```kotlin
+var result = editText.validator()
+                    .email()
+                    .atLeastOneUpperCase()
+                    .atLeastOneLowerCase()
+                    .maximumLength(20)
+                    .minimumLength(5)
+                    .noNumbers()
+                    .addSuccessCallback {
+                        //Proceed
+                    }
+                    .addErrorCallback { errorType ->
+                        when (errorType) {
+                            ValidationError.EMAIL -> {
+                                editText.error = "Email format is incorrect"
+                            }
+                            ValidationError.AT_LEAST_ONE_LOWER_CASE -> {
+                                editText.error = "Please provide at-least one lower case letter"
+                            }
+                            ValidationError.AT_LEAST_ONE_UPPER_CASE -> {
+                                editText.error = "Please provide at-least one upper case letter"
+                            }
+                            else -> {
+                                editText.error = "Not Enough"
+                            }
+                        }
+                    }
+                    .validate()
+```
+The `addErrorCallback` also provides a parameter of type `ValidationError`. This parameter provies the type of validation error that has occured. `ValidationError` is an enum, the naming convention is very simple, the names are same as the corresponding validation functions. For example, for validation function `atLeastOneLowerCase`, the validation error will be `ValidationError.AT_LEAST_ONE_LOWER_CASE`.
+
+### Using Validator independently 
+`Validator` class can also be used independently, just instantiate an object of it.
+```kotlin
+val validator = Validator("somePassword#123")
+validator.atLeastOneNumber()
+    .atLeastOneUpperCase()
+    .minimumLength(8)
+    .maximumLength(32)
+    .atLeastOneSpecialCharacter()
+    .validate()
 ```
 
 Support
