@@ -61,8 +61,35 @@ class MainActivity : AppCompatActivity() {
                     .maximumLength(20)
                     .minimumLength(5)
                     .noNumbers()
+                    .addSuccessCallback {
+                        //Proceed
+                    }
+                    .addErrorCallback { errorType ->
+                        when (errorType) {
+                            ValidationError.AT_LEAST_ONE_LOWER_CASE -> {
+                                editText.error = "Please provide at-least one lower case letter"
+                            }
+                            ValidationError.AT_LEAST_ONE_UPPER_CASE -> {
+                                editText.error = "Please provide at-least one upper case letter"
+                            }
+                            else -> {
+                                editText.error = "Not Enough"
+                            }
+                        }
+                    }
                     .validate()
         }
+
+        LogUtils.addLevel(LogLevel.ALL)
+        debug("This is a debug message")
+        error("Some error occurred")
+        warn("This is a warning")
+        info("Some information")
+        verbose("VERBOSE!")
+        wtf("Ignore this")
+        json("{message:'This is a message', version: {num: 10}}")
+        shout("Shout this message loud!\nThank YOU")
+        exception(Exception("ERROR"))
 
         /*val validator = Validator(passwordEditText.text.toString())
         validator.atLeastOneNumber()
