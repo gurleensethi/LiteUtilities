@@ -81,6 +81,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         LogUtils.addLevel(LogLevel.ALL)
+        LogUtils.addLevel(LogLevel.DEBUG)
+        LogUtils.addLevel(LogLevel.INFO)
+        LogUtils.addLevel(LogLevel.ERROR)
+        LogUtils.addLevel(LogLevel.VERBOSE)
+        LogUtils.addLevel(LogLevel.WARN)
+        LogUtils.addLevel(LogLevel.WTF)
         debug("This is a debug message")
         error("Some error occurred")
         warn("This is a warning")
