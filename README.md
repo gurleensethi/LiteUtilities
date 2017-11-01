@@ -27,7 +27,7 @@ compile 'com.github.gurleensethi:LiteUtilities:v1.3.0'
 * [ValidatorUtils](#validatorutils) - Fast and simple text validation.
 * [LogUtils](#logutils) - Simple and easy android logging.
 
-##### The library is designed in such a way that if don't want to import the complete library but only want a specific Util, then you can download the corresponding file for the required Util, every Util has its own file/files and is not dependent on any other Util. You can find the code [here](https://github.com/gurleensethi/LiteUtilities/tree/master/liteutils/src/main/java/com/thetechnocafe/gurleensethi/liteutils).
+##### The library is designed in such a way that if don't want to import the complete library but only want a specific Util, then you can download the corresponding file for the required Util, every Util has its own file/files and is independent of any other Util. You can find the code [here](https://github.com/gurleensethi/LiteUtilities/tree/master/liteutils/src/main/java/com/thetechnocafe/gurleensethi/liteutils).
 
 #### Motivation
 Primary motivation behind the development of this library is to hide the day-to-day boilerplate code that android developers have to deal with, by providing a simple and concise API, but also maintaining complete functionality at the same time.
@@ -336,7 +336,7 @@ Output:
 Support
 ======
 
-The primary purpose of this library is to speed up development process by removing boilerplate code, so if you have and idea or a new feature that meets the requirement and enhances the library as a whole or you found a bug in the existing code please open an [issue](https://github.com/gurleensethi/LiteUtilities/issues/new), it is much appreciated.
+The primary purpose of this library is to speed up development process by removing boilerplate code, so if you have any idea or a new feature that meets the requirement and enhances the library as a whole or you found a bug in the existing code please open an [issue](https://github.com/gurleensethi/LiteUtilities/issues/new), it is much appreciated.
 
 License
 ======
