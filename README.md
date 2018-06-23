@@ -58,7 +58,7 @@ recyclerAdapter.addViewsList(listOfViews)
 ```
 To bind data, add data bind listener:
 ```kotlin
-recyclerAdapter.addOnDataBindListener { itemView, item, position. innerViews -> 
+recyclerAdapter.addOnDataBindListener { itemView, item, position, innerViews -> 
             val textView = innerViews[R.id.textView] as TextView
             textView.text = item
         }
