@@ -66,7 +66,7 @@ class Validator(val text: String) {
     }
 
     public fun email(): Validator {
-        if (!text.matches(Regex("^[A-Za-z0-9+_.-]+@(.+)\$"))) {
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(text).matches()) {
             setErrorType(ValidationError.EMAIL)
         }
         return this
